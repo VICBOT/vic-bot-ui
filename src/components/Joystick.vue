@@ -22,7 +22,6 @@
         },
         size: 300
       });
-      console.log(this.controller);
       this.controller.on("move", this.move);
       this.controller.on("end", this.brake);
     },
