@@ -14,19 +14,19 @@ import Vue from "vue";
 import Quasar, * as All from "quasar";
 import router from "./router";
 import VueSocketIO from "vue-socket.io";
-
+import { HOST, PORT } from "./config.json";
 Vue.config.productionTip = false;
 
 Vue.use(Quasar, {
   components: All
 }); // Install Quasar Framework
 
-Vue.use(VueSocketIO, "localhost:80");
+Vue.use(VueSocketIO, `${HOST}${PORT !== 80 ? `:${PORT}` : ""}`);
 
 if (__THEME === "mat") {
   import("quasar-extras/roboto-font");
 }
-// import 'quasar-extras/material-icons'
+import "quasar-extras/material-icons";
 // import 'quasar-extras/ionicons'
 // import 'quasar-extras/fontawesome'
 // import 'quasar-extras/animate'

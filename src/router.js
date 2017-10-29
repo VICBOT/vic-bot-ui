@@ -3,6 +3,10 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
+register("joystick", "Joystick");
+function register(id, component) {
+  return Vue.component(id, load(component));
+}
 function load(component) {
   // '@' is aliased to src/components
   return () => import(`@/${component}.vue`);
