@@ -30,17 +30,21 @@
         //this.$socket.emit("ui", data.type);
         force = force >= 1 ? 1 : force;
         let speed = ~~(force * 255);
+
         this.$socket.emit("ui", {
           motor: {
             speed,
-            force,
-            direction,
+            direction: direction.angle,
             host: document.location.host
           }
         });
       },
       brake() {
-        this.$socket.emit("ui", "BRAKE");
+        this.$socket.emit("ui", {
+          motor: {
+            speed: 0
+          }
+        });
       }
     }
   };

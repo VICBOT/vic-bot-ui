@@ -1,6 +1,6 @@
 <template lang="pug">
   q-layout
-    q-checkbox(v-model="led" label="Led")
+    voice
     pre {{data}}
     q-btn(@click="$refs.messageModal.open()" icon="chat" round style="bottom: 18px; right: 18px; z-index: 9999" color="primary").fixed-bottom-right
     q-modal(ref="messageModal", :content-css="{'min-width': '75%', height: '100%'}", position="right")
@@ -62,38 +62,15 @@
           date: new Date(),
           username: this.username
         };
-        this.$socket.emit("ui", message);
+        this.sayMessage(this.message);
         this.message = "";
       },
-      moveMotor(direction) {
-        let directions = {
-          up: {
-            speed: 100,
-            motor: "all",
-            direction: "up"
-          },
-          down: {
-            speed: 100,
-            reverse: true,
-            motor: "all",
-            direction: "down"
-          },
-          left: {
-            speed: 100,
-            motor: "left",
-            direction: "left"
-          },
-          right: {
-            speed: 100,
-            motor: "right",
-            direction: "right"
-          }
-        };
-
-        this.$socket.emit("ui", {
-          motor: directions[direction],
-          message: this.message
-        });
+      sayMessage(message) {
+        let utterance = new SpeechSynthesisUtterance();
+        utterance.text = message;
+        //utterance.lang = "es-ES";
+        speechSynthesis.speak(utterance);
+        this.$socket.emit("ui", message);
       }
     }
   };

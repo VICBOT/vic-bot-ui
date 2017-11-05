@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 register("joystick", "Joystick");
+register("voice", "Voice");
 function register(id, component) {
   return Vue.component(id, load(component));
 }
