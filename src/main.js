@@ -14,14 +14,14 @@ import Vue from "vue";
 import Quasar, * as All from "quasar";
 import router from "./router";
 import VueSocketIO from "vue-socket.io";
-import { HOST, PORT } from "./config.json";
+import { HOST } from "./config.json";
 Vue.config.productionTip = false;
 
 Vue.use(Quasar, {
   components: All
 }); // Install Quasar Framework
 
-Vue.use(VueSocketIO, `${HOST}${PORT !== 80 ? `:${PORT}` : ""}`);
+Vue.use(VueSocketIO, HOST);
 
 if (__THEME === "mat") {
   import("quasar-extras/roboto-font");
